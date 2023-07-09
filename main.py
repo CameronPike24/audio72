@@ -164,6 +164,9 @@ class Recorder(object):
         
  
     def mic_callback(self, buf):
+    
+        global levels
+    
         self.sData.append(buf)
         print ('got : ' + str(len(buf)))
         print(self.sData)
@@ -184,9 +187,9 @@ class Recorder(object):
         #print("sh")
         #print(sh)
         
-        graph_values = np.frombuffer(buf, np.int16)
-        print("graph_values")
-        print(graph_values)
+        levels = np.frombuffer(buf, np.int16)
+        print("levels")
+        print(levels)
         
         
         #values = array("h", buf)
@@ -642,7 +645,8 @@ class RecordForm(BoxLayout): #
         #REC.prepare()
         REC.start()
         self.ids.graph.add_plot(self.plot)
-        Clock.schedule_interval(self.get_value, 0.1)
+        #Use sample rate
+        Clock.schedule_interval(self.get_value, 1/60)
         #Clock.schedule_interval(self.get_value, 0.1)
         #lock.schedule_interval(self.get_value, 1/samples_per_second)
         
@@ -664,9 +668,9 @@ class RecordForm(BoxLayout): #
     
         #print("r_values for graph")
         #print(array_values)
-        array_values = [100,150,200,25,200,230,130,170,200,300,399,200,50,45,300,34,33,49,230,120,156,200,40,45,100,200,120,95,39,44,77,99,30]
+        #array_values = [100,150,200,25,200,230,130,170,200,300,399,200,50,45,300,34,33,49,230,120,156,200,40,45,100,200,120,95,39,44,77,99,30]
         #NB j//5 not j/5 removes any remainder which results in a float
-        self.plot.points = [(i, j//5) for i, j in enumerate(array_values)] 
+        self.plot.points = [(i, j//5) for i, j in enumerate(levels)] 
         #self.plot.points = [(i, j//5) for i, j in enumerate(islice(array_values, 300))] 
         
         print("self.plot.points")
@@ -712,6 +716,7 @@ class Main(App):
 
 
 if __name__ == "__main__":
+    levels = []  # store levels of microphone
     Main().run()
 
 
