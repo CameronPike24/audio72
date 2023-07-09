@@ -184,9 +184,9 @@ class Recorder(object):
         #print("sh")
         #print(sh)
         
-        r_values = np.frombuffer(buf, np.int16)
-        print("values")
-        print(values)
+        graph_values = np.frombuffer(buf, np.int16)
+        print("graph_values")
+        print(graph_values)
         
         
         #values = array("h", buf)
@@ -204,12 +204,12 @@ class Recorder(object):
         
         
         #Plot graph
-        graph_values = r_values[:]
+        #graph_values = r_values[:]
         
         #graph_values = np.array(struct.unpack('<h', graph_values))
         #graph_values = np.array(graph_values ) / 32767
-        print("graph_values")
-        print(graph_values)
+        #print("graph_values")
+        #print(graph_values)
         
         self.record_form = RecordForm()
         self.record_form.get_value(graph_values)
