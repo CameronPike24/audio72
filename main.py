@@ -654,6 +654,7 @@ class RecordForm(BoxLayout): #
     def get_value(self, array_values):
         print("r_values for graph")
         print(array_values)
+        array_values = [100,150,200,25,200,230,130,170,200,300,399,200,50,45,300,34,33,49,230,120,156,200,40,45,100,200,120,95,39,44,77,99,30]
         #NB j//5 not j/5 removes any remainder which results in a float
         self.plot.points = [(i, j//5) for i, j in enumerate(array_values)] 
         #self.plot.points = [(i, j//5) for i, j in enumerate(islice(array_values, 300))] 
