@@ -1,0 +1,23 @@
+#:import utils kivy.utils
+#:import MeshLinePlot kivy_garden.graph.MeshLinePlot
+<RecordForm>:  
+
+    BoxLayout:
+        orientation: "vertical"
+        BoxLayout:
+            size_hint: [1, .8]
+            Graph:
+                id: graph
+                xlabel: ""
+                ylabel: "Level"
+        BoxLayout:
+            size_hint: [1, .2]
+            orientation: "horizontal"
+            Button:
+                text: "START"
+                bold: True
+                on_press: root.start_record()
+            Button:
+                text: "STOP"
+                bold: True
+                on_press: root.stop()                
