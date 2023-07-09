@@ -211,8 +211,14 @@ class Recorder(object):
         #print("graph_values")
         #print(graph_values)
         
+        
+        
+        '''
         self.record_form = RecordForm()
         self.record_form.get_value(graph_values)
+        '''
+        
+        
         
         '''
         # reduce by 20%
@@ -636,6 +642,7 @@ class RecordForm(BoxLayout): #
         #REC.prepare()
         REC.start()
         self.ids.graph.add_plot(self.plot)
+        Clock.schedule_interval(self.get_value, 0.1)
         #Clock.schedule_interval(self.get_value, 0.1)
         #lock.schedule_interval(self.get_value, 1/samples_per_second)
         
@@ -647,13 +654,16 @@ class RecordForm(BoxLayout): #
         #Clock.unschedule(self.update_display)
         #self.p_bar.value = 0
         REC.stop()
+        Clock.unschedule(self.get_value)
         #lock.unschedule(self.get_value)
         #self.b_record.disabled = False
         
     #def get_value(self, dt):
-    def get_value(self, array_values):
-        print("r_values for graph")
-        print(array_values)
+    #def get_value(self, array_values):
+    def get_value(self, dt):
+    
+        #print("r_values for graph")
+        #print(array_values)
         array_values = [100,150,200,25,200,230,130,170,200,300,399,200,50,45,300,34,33,49,230,120,156,200,40,45,100,200,120,95,39,44,77,99,30]
         #NB j//5 not j/5 removes any remainder which results in a float
         self.plot.points = [(i, j//5) for i, j in enumerate(array_values)] 
